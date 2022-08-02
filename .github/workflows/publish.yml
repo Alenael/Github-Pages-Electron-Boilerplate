@@ -13,22 +13,22 @@ jobs:
 
     steps:
       - name: Setup Dependancies
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
         with:
           node-version: "16"
           cache: "yarn"
-        run: |
+        - run: |
           yarn install --frozen-lockfile --immutable
 
       - name: Install Wine
-        run: |
+        - run: |
           sudo dpkg --add-architecture i386
           sudo apt update
           sudo apt install -y wine-stable
 
       - name: Package via Electron
-        run: |
+        - run: |
           yarn install
           yarn run make
           yarn run make -- --platform=win32
