@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: "16"
 
+      - name: Install Dependancies
+        run: |
+          yarn run install
+
       - name: Install Wine
         run: |
           sudo dpkg --add-architecture i386
