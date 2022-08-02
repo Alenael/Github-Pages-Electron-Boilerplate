@@ -12,15 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
+      - name: Setup Dependancies
         uses: actions/checkout@v3
-
-      - name: Install Node.js and Yarn Dependancies
         uses: actions/setup-node@v3
         with:
           node-version: "16"
           cache: "yarn"
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --immutable
 
       - name: Install Wine
         run: |
