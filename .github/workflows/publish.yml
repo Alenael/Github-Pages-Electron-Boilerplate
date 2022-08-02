@@ -46,6 +46,7 @@ jobs:
 
       - name: Package via Electron
         run: |
+          node scripts/prepare-electron.js
           yarn install --frozen-lockfile --immutable
           yarn run make
           yarn run make -- --platform=win32

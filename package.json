@@ -1,8 +1,8 @@
 {
-  "name": "testsite",
-  "productName": "testsite",
+  "name": "github-pages-electron-boilerplate",
+  "productName": "github-pages-electron-boilerplate",
   "version": "1.0.0",
-  "description": "Test Site",
+  "description": "Github Pages - Electron Boilerplate",
   "main": ".webpack/main",
   "scripts": {
     "lint": "eslint . --fix --ext js,jsx,ts,tsx --max-warnings 0",
