@@ -36,7 +36,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./.webpack
+          publish_dir: .webpack
 
       - name: Install Wine
         run: |
@@ -46,7 +46,7 @@ jobs:
 
       - name: Package via Electron
         run: |
-          yarn install
+          yarn install --frozen-lockfile --immutable
           yarn run make
           yarn run make -- --platform=win32
           yarn run make -- --platform=darwin
