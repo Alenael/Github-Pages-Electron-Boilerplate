@@ -12,15 +12,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: "false"
+          ref: ${{ github.ref }}
 
-      - name: Install Dependancies
+      - name: Install Node and Yarn
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "lts/*"
           cache: "yarn"
 
-      - run: yarn install --frozen-lockfile --immutable
+      - name: Build and Test
+        run: |
+          yarn install --frozen-lockfile --immutable
+          yarn run lint
+          yarn run format
+          yarn run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./.webpack
 
       - name: Install Wine
         run: |
