@@ -1,0 +1,49 @@
+{
+  "name": "testsite",
+  "productName": "testsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".webpack/main",
+  "scripts": {
+    "dev": "electron-forge start",
+    "make": "electron-forge make"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./app-icons/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip"
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "../src/index.ejs",
+                  "js": "../src/renderer.tsx",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-zip": "^6.0.0-beta.65",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.65",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "electron": "19.0.10",
+    "fork-ts-checker-webpack-plugin": "^7.2.1"
+  }
+}
