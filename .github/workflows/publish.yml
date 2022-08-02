@@ -19,7 +19,8 @@ jobs:
         with:
           node-version: "16"
           cache: "yarn"
-        run: yarn install --frozen-lockfile --immutable
+
+      - run: yarn install --frozen-lockfile --immutable
 
       - name: Install Wine
         run: |
