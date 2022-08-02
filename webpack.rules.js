@@ -1,6 +1,6 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const isDevelopment = process.env.NODE_ENV !== "production";
 const isFastRefresh = process.env.FAST_REFRESH === "true";
+const outputDirectory = ".webpack";
 
 module.exports = [
   {
@@ -21,22 +21,8 @@ module.exports = [
   {
     test: /\.s?[ac]ss$/i,
     use: [
-      isDevelopment
-        ? "style-loader"
-        : {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: false,
-            },
-          },
-      {
-        loader: "css-loader",
-        options: {
-          esModule: false,
-          importLoaders: 2,
-          sourceMap: isDevelopment,
-        },
-      },
+      "style-loader",
+      "css-loader",
       {
         loader: "postcss-loader",
         options: {
@@ -62,18 +48,19 @@ module.exports = [
     },
   },
   {
-    test: /\.(png|svg|jpg|gif)$/,
+    test: /\.(png|svg|jpe?g|gif|jp2|webp)$/,
     loader: "file-loader",
     options: {
-      name: "assets/img/[name]-[hash].[ext]",
+      name: "[name]-[contenthash].[ext]",
       esModule: false,
+      publicPath: `${outputDirectory}/images`,
     },
   },
   {
     test: /\.(ttf|eot|otf|woff)$/,
     loader: "file-loader",
     options: {
-      name: "assets/fonts/[name]-[hash].[ext]",
+      name: "assets/fonts/[name]-[contenthash].[ext]",
       esModule: false,
     },
   },
@@ -81,7 +68,7 @@ module.exports = [
     test: /\.(ico)$/,
     loader: "file-loader",
     options: {
-      name: "[name]-[hash].[ext]",
+      name: "[name]-[contenthash].[ext]",
       esModule: false,
     },
   },
