@@ -1,0 +1,11 @@
+.git
+.webpack
+out
+dist
+node_modules
+
+jest.config.js
+tailwind.config.js
+webpack.main.config.js
+webpack.plugins.js
+webpack.renderer.config.js
