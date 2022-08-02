@@ -6,6 +6,8 @@ on:
     tags:
       - "v*"
 
+  workflow_dispatch:
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -24,7 +26,6 @@ jobs:
           sudo dpkg --add-architecture i386
           sudo apt update
           sudo apt install -y wine-stable
-
 
       - name: Package via Electron
         run: |
