@@ -17,7 +17,4 @@ copydir(src, dest, {});
 // Overwrite nested package.json version, because this is what electron-forge
 // uses to set the version in the Electron app.
 electronPkgJson.version = parentPkgJson.version;
-fs.writeFileSync(
-  path.join(__dirname, "..", "electron", "package.json"),
-  JSON.stringify(electronPkgJson, null, 2)
-);
+fs.writeFileSync(path.join(__dirname, "..", "electron", "package.json"), JSON.stringify(electronPkgJson, null, 2));

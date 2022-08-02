@@ -14,11 +14,7 @@ module.exports = [
           "@babel/preset-typescript",
           ["@babel/preset-react", { development: isDevelopment }],
         ],
-        plugins: [
-          isDevelopment &&
-            isFastRefresh &&
-            require.resolve("react-refresh/babel"),
-        ].filter(Boolean),
+        plugins: [isDevelopment && isFastRefresh && require.resolve("react-refresh/babel")].filter(Boolean),
       },
     },
   },
