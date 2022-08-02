@@ -19,20 +19,16 @@ jobs:
         with:
           node-version: "16"
 
-      # Wine is required in order to generate an Electron build for Windows from
-      # an Ubuntu machine.
       - name: Install Wine
         run: |
           sudo dpkg --add-architecture i386
           sudo apt update
           sudo apt install -y wine-stable
 
-      # yarn run make uses Electron Forge, see package.json above for details.
-      # We have to run make three times, once for each platform. This step
-      # generates three directories, corresponding to each platform.
-      # Notice the working-directory is now ./electron!
-      - name: Copy HTML app to electron/, and make Electron packages
+
+      - name: Package via Electron
         run: |
+          yarn run make
           yarn run make -- --platform=win32
           yarn run make -- --platform=darwin
         working-directory: ./electron
