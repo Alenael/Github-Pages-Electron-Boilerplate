@@ -8,7 +8,8 @@
     "lint": "eslint . --fix --ext js,jsx,ts,tsx --max-warnings 0",
     "format": "prettier --write .",
     "dev": "cross-env NODE_ENV=development FAST_REFRESH=true webpack serve --hot",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "cross-env NODE_ENV=production webpack",
+    "test": "jest --passWithNoTests"
   },
   "keywords": [],
   "license": "MIT",
@@ -30,6 +31,7 @@
     "eslint": "^8.21.0",
     "eslint-plugin-import": "^2.25.0",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^28.1.3",
     "mini-css-extract-plugin": "^2.6.1",
     "node-loader": "^2.0.0",
     "postcss": "^8.4.14",
