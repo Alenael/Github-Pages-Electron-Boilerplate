@@ -29,6 +29,7 @@ jobs:
 
       - name: Package via Electron
         run: |
+          yarn install
           yarn run make
           yarn run make -- --platform=win32
           yarn run make -- --platform=darwin
