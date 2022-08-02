@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -10,6 +9,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const packageFolder = path.resolve(__dirname, ".webpack");
 const isDevelopment = process.env.NODE_ENV !== "production";
+const rules = require("./webpack.rules.js");
 
 module.exports = {
   mode: isDevelopment ? "development" : "production",
@@ -35,92 +35,7 @@ module.exports = {
   },
 
   module: {
-    rules: [
-      {
-        test: /\.(t|j)sx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-typescript",
-              ["@babel/preset-react", { development: isDevelopment }],
-            ],
-            plugins: [
-              isDevelopment && require.resolve("react-refresh/babel"),
-            ].filter(Boolean),
-          },
-        },
-      },
-      {
-        test: /\.s?[ac]ss$/i,
-        use: [
-          isDevelopment
-            ? "style-loader"
-            : {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  esModule: false,
-                },
-              },
-          {
-            loader: "css-loader",
-            options: {
-              esModule: false,
-              importLoaders: 2,
-              sourceMap: isDevelopment,
-            },
-          },
-          {
-            loader: "postcss-loader",
-            options: {
-              sourceMap: isDevelopment,
-              postcssOptions: {
-                plugins: [require("tailwindcss")],
-              },
-            },
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: isDevelopment,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.html$/i,
-        loader: "html-loader",
-        options: {
-          esModule: false,
-        },
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        loader: "file-loader",
-        options: {
-          name: "assets/img/[name]-[hash].[ext]",
-          esModule: false,
-        },
-      },
-      {
-        test: /\.(ttf|eot|otf|woff)$/,
-        loader: "file-loader",
-        options: {
-          name: "assets/fonts/[name]-[hash].[ext]",
-          esModule: false,
-        },
-      },
-      {
-        test: /\.(ico)$/,
-        loader: "file-loader",
-        options: {
-          name: "[name]-[hash].[ext]",
-          esModule: false,
-        },
-      },
-    ],
+    rules: rules,
   },
 
   plugins: [
