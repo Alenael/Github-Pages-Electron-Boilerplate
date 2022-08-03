@@ -35,8 +35,6 @@ jobs:
           yarn run lint          
           yarn run test
           yarn run build
-          pwd
-          ls public/*.*
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -44,11 +42,6 @@ jobs:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./public
-
-      - name: Test
-        run: |
-          pwd
-          ls public/*.*
 
       - name: Install Wine
         run: |
