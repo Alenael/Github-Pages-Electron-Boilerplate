@@ -1,6 +1,6 @@
 const isDevelopment = process.env.NODE_ENV !== "production";
 const isFastRefresh = process.env.FAST_REFRESH === "true";
-const outputDirectory = "out";
+const outputDirectory = "public";
 
 module.exports = [
   {

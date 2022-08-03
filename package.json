@@ -3,7 +3,7 @@
   "productName": "github-pages-electron-boilerplate",
   "version": "1.0.0",
   "description": "Github Pages - Electron Boilerplate",
-  "main": "out/main",
+  "main": "public/main",
   "scripts": {
     "lint": "eslint . --fix --ext js,jsx,ts,tsx --max-warnings 0",
     "format": "prettier --write .",

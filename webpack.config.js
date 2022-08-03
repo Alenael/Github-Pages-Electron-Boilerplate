@@ -5,7 +5,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = () => {
-  const packageFolder = path.resolve(__dirname, "out");
+  const packageFolder = path.resolve(__dirname, "public");
   const isDevelopment = process.env.NODE_ENV !== "production";
 
   const htmlConfig = {
