@@ -18,9 +18,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          persist-credentials: "false"
-          ref: ${{ github.ref }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
