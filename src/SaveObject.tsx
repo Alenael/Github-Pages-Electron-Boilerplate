@@ -1,27 +1,52 @@
 import { Reviver, Generic_toJSON, Generic_fromJSON } from "./utils/JSONReviver";
 import { save } from "./db";
+import { loadPlayer, Player } from "./Player";
+
+export interface SaveData {
+  fileName: string;
+  save: string;
+  savedOn: number;
+}
 
 class TestSaveObject {
-  SaveTimestamp = "";
+  PlayerSave = "";
 
   getSaveString(): string {
-    this.SaveTimestamp = new Date().getTime().toString();
+    this.PlayerSave = JSON.stringify(Player);
 
     const saveString = btoa(unescape(encodeURIComponent(JSON.stringify(this))));
     return saveString;
   }
 
-  saveGame(): void {
+  saveGame(): Promise<void> {
+    const savedOn = new Date().getTime();
+    Player.lastSave = savedOn;
     const saveString = this.getSaveString();
+    return new Promise((resolve, reject) => {
+      save(saveString)
+        .then(() => {
+          // const saveData: SaveData = {
+          //   fileName: this.getSaveFileName(),
+          //   save: saveString,
+          //   savedOn,
+          // };
+          //pushGameSaved(saveData);
 
-    save(saveString)
-      .then(() => {
-        // if (emitToastEvent) {
-        //   SnackbarEvents.emit("Game Saved!", "info", 2000);
-        // }
-        console.log("Game Saved!");
-      })
-      .catch((err) => console.error(err));
+          // if (emitToastEvent) {
+          //   SnackbarEvents.emit("Game Saved!", ToastVariant.INFO, 2000);
+          // }
+          return resolve();
+        })
+        .catch((err) => {
+          console.error(err);
+          return reject();
+        });
+    });
+  }
+
+  getSaveFileName(): string {
+    const epochTime = Math.round(Date.now() / 1000);
+    return `testSave-${epochTime}.json`;
   }
 
   toJSON(): any {
@@ -37,33 +62,13 @@ function loadGame(saveString: string): boolean {
   if (!saveString) return false;
   saveString = decodeURIComponent(escape(atob(saveString)));
 
-  const __saveObj = JSON.parse(saveString, Reviver);
+  const saveObj = JSON.parse(saveString, Reviver);
+  loadPlayer(saveObj.PlayerSave);
   return true;
-}
-
-function download(filename: string, content: string): void {
-  const file = new Blob([content], { type: "text/plain" });
-  const navigator = window.navigator as any;
-  if (navigator.msSaveOrOpenBlob) {
-    // IE10+
-    navigator.msSaveOrOpenBlob(file, filename);
-  } else {
-    // Others
-    const a = document.createElement("a"),
-      url = URL.createObjectURL(file);
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function () {
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    }, 0);
-  }
 }
 
 Reviver.constructors.TestaveObject = TestSaveObject;
 
-export { saveObject, loadGame, download };
+export { saveObject, loadGame };
 
 const saveObject = new TestSaveObject();
