@@ -60,7 +60,9 @@ module.exports = () => {
     },
 
     output: {
-      clean: true,
+      clean: {
+        keep: /.nojekyll/, // Keep these assets under 'ignored/dir'.
+      },
       path: packageFolder,
       filename: "bundle-[contenthash].js",
     },

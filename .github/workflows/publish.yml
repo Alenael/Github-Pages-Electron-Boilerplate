@@ -48,7 +48,7 @@ jobs:
       - name: Test
         run: |
           pwd
-          ls out/*.*
+          ls public/*.*
 
       - name: Install Wine
         run: |
