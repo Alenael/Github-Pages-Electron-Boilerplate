@@ -36,7 +36,7 @@ jobs:
           yarn run test
           yarn run build
           pwd
-          ls out/*.*
+          ls public/*.*
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
