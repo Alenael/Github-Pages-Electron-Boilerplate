@@ -22,15 +22,19 @@ jobs:
           persist-credentials: "false"
           ref: ${{ github.ref }}
 
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: Cache
         uses: actions/cache@v3
+        id: yarn-cache
         with:
           path: |
-            ~/.yarn
-            ${{ github.workspace }}/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-yarn-
 
       - name: Install Node and Yarn
         uses: actions/setup-node@v3
