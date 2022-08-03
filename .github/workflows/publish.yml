@@ -59,6 +59,11 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./out
 
+      - name: Test
+        run: |
+          pwd
+          ls out/*.*
+
       - name: Install Wine
         run: |
           sudo dpkg --add-architecture i386
