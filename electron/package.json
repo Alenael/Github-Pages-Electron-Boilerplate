@@ -1,6 +1,6 @@
 {
-  "name": "github-pages-electron-boilerplate",
-  "productName": "github-pages-electron-boilerplate",
+  "name": "electron-build",
+  "productName": "electron-build",
   "version": "1.0.0",
   "description": "Github Pages - Electron Boilerplate",
   "main": ".webpack/main",
