@@ -8,8 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  release:
+  deployment:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
 
     steps:
       - name: Checkout Code
@@ -17,6 +21,16 @@ jobs:
         with:
           persist-credentials: "false"
           ref: ${{ github.ref }}
+
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.yarn
+            ${{ github.workspace }}/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Install Node and Yarn
         uses: actions/setup-node@v3
