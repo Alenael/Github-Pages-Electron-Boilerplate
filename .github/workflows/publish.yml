@@ -36,13 +36,6 @@ jobs:
           yarn run test
           yarn run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./public
-
       - name: Install Wine
         run: |
           sudo dpkg --add-architecture i386
@@ -57,6 +50,13 @@ jobs:
           yarn run make -- --platform=win32
           yarn run make -- --platform=darwin
         working-directory: ./electron
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./public
 
       # View this action's source code and documentation at
       # https://github.com/game-ci/steam-deploy. Note that this action only
