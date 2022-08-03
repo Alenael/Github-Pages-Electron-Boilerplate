@@ -1,7 +1,5 @@
 .git
-.webpack
 out
-dist
 node_modules
 
 jest.config.js

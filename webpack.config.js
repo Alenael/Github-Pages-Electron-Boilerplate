@@ -1,14 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = () => {
-  const packageFolder = path.resolve(__dirname, ".webpack");
+  const packageFolder = path.resolve(__dirname, "out");
   const isDevelopment = process.env.NODE_ENV !== "production";
 
   const htmlConfig = {
@@ -65,7 +62,6 @@ module.exports = () => {
     output: {
       clean: true,
       path: packageFolder,
-      sourceMapFilename: "bundle-[contenthash].map",
       filename: "bundle-[contenthash].js",
     },
 
