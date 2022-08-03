@@ -1,5 +1,5 @@
 .git
-out
+public
 node_modules
 
 jest.config.js
