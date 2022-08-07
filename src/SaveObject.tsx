@@ -1,40 +1,25 @@
-import { Reviver, Generic_toJSON, Generic_fromJSON } from "./utils/JSONReviver";
 import { save } from "./db";
-import { loadPlayer, Player } from "./Player";
+import { setPlayer, setlastSave } from "./slices/player";
+import { store } from "./store";
 
-export interface SaveData {
-  fileName: string;
-  save: string;
-  savedOn: number;
-}
-
-class TestSaveObject {
+export class TestSaveObject {
   PlayerSave = "";
 
-  getSaveString(): string {
-    this.PlayerSave = JSON.stringify(Player);
-
+  private getSaveString(): string {
     const saveString = btoa(unescape(encodeURIComponent(JSON.stringify(this))));
     return saveString;
   }
 
   saveGame(): Promise<void> {
-    const savedOn = new Date().getTime();
-    Player.lastSave = savedOn;
+    const state = store.getState();
+    const dispatch = store.dispatch;
+    this.PlayerSave = JSON.stringify(state.player);
+
+    dispatch(setlastSave(new Date().getTime()));
     const saveString = this.getSaveString();
     return new Promise((resolve, reject) => {
       save(saveString)
         .then(() => {
-          // const saveData: SaveData = {
-          //   fileName: this.getSaveFileName(),
-          //   save: saveString,
-          //   savedOn,
-          // };
-          //pushGameSaved(saveData);
-
-          // if (emitToastEvent) {
-          //   SnackbarEvents.emit("Game Saved!", ToastVariant.INFO, 2000);
-          // }
           return resolve();
         })
         .catch((err) => {
@@ -44,31 +29,14 @@ class TestSaveObject {
     });
   }
 
-  getSaveFileName(): string {
-    const epochTime = Math.round(Date.now() / 1000);
-    return `testSave-${epochTime}.json`;
-  }
-
-  toJSON(): any {
-    return Generic_toJSON("TestSaveObject", this);
-  }
-
-  static fromJSON(value: { data: any }): TestSaveObject {
-    return Generic_fromJSON(TestSaveObject, value.data);
+  loadGame(saveString: string): boolean {
+    if (!saveString) return false;
+    const dispatch = store.dispatch;
+    saveString = decodeURIComponent(escape(atob(saveString)));
+    const saveObj: TestSaveObject = JSON.parse(saveString);
+    dispatch(setPlayer(JSON.parse(saveObj.PlayerSave)));
+    return true;
   }
 }
 
-function loadGame(saveString: string): boolean {
-  if (!saveString) return false;
-  saveString = decodeURIComponent(escape(atob(saveString)));
-
-  const saveObj = JSON.parse(saveString, Reviver);
-  loadPlayer(saveObj.PlayerSave);
-  return true;
-}
-
-Reviver.constructors.TestaveObject = TestSaveObject;
-
-export { saveObject, loadGame };
-
-const saveObject = new TestSaveObject();
+export const saveObject = new TestSaveObject();

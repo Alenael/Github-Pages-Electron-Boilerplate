@@ -47,7 +47,6 @@ export function load(): Promise<string> {
 export function save(saveString: string): Promise<void> {
   return getDB().then((db) => {
     return new Promise<void>((resolve, reject) => {
-      // We'll save to both localstorage and indexedDb
       const request = db.put(saveString, "save");
 
       request.onerror = function (e) {

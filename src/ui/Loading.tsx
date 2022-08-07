@@ -8,7 +8,6 @@ import { styled } from "@mui/material/styles";
 import { load } from "../db";
 import { Engine } from "../Engine";
 import { GameRoot } from "./GameRoot";
-import { Player } from "../Player";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -42,7 +41,7 @@ export function LoadingScreen(): React.ReactElement {
   return (
     <StyledBox>
       {loaded ? (
-        <GameRoot engine={Engine} player={Player} />
+        <GameRoot engine={Engine} />
       ) : (
         <Grid container direction="column" justifyContent="center" alignItems="center" style={{ minHeight: "100vh" }}>
           <Grid item>
