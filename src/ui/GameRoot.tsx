@@ -15,6 +15,7 @@ export function GameRoot({ engine }: IProps): React.ReactElement {
   const player = useSelector((state: RootState) => state.player);
   return (
     <div>
+      <h1 className="text-xl">Formatted Text</h1>
       <Typography>
         Winner! {player.lastUpdate} - {player.totalPlaytime} - {player.lastSave}
       </Typography>
