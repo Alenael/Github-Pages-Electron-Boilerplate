@@ -50,7 +50,7 @@ module.exports = () => {
 
   return {
     mode: isDevelopment ? "development" : "production",
-    devtool: isDevelopment ? "source-map" : false,
+    devtool: isDevelopment ? "inline-source-map" : false,
     entry: path.resolve(__dirname, "src", "renderer.tsx"),
 
     watchOptions: {
@@ -64,7 +64,7 @@ module.exports = () => {
         keep: /.nojekyll/, // Keep these assets under 'ignored/dir'.
       },
       path: packageFolder,
-      filename: "bundle-[contenthash].js",
+      filename: "bundle.[contenthash].js",
     },
 
     resolve: {
@@ -83,7 +83,7 @@ module.exports = () => {
       new HtmlWebPackPlugin(htmlConfig),
       isDevelopment &&
         new webpack.EvalSourceMapDevToolPlugin({
-          exclude: ["vendor"],
+          //exclude: ["vendor"],
           columns: true,
           module: true,
         }),

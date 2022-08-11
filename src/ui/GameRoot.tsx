@@ -3,8 +3,8 @@ import { Typography } from "@mui/material";
 
 import { IEngine } from "../Engine";
 import { useSelector } from "react-redux";
-import type { RootState } from "../store";
-import { saveObject } from "../SaveObject";
+import { RootState, saveToLocalStorage } from "../store";
+//import { saveObject } from "../SaveObject";
 
 interface IProps {
   engine: IEngine;
@@ -21,10 +21,17 @@ export function GameRoot({ engine }: IProps): React.ReactElement {
       </Typography>
       <button
         onClick={() => {
-          saveObject.saveGame();
+          saveToLocalStorage();
         }}
       >
         Save Game
+      </button>
+      <button
+        onClick={() => {
+          //persistor.purge();
+        }}
+      >
+        Purge Game
       </button>
     </div>
   );

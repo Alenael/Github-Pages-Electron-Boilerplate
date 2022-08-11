@@ -1,6 +1,6 @@
 //import { saveObject, loadGame } from "./SaveObject";
 import { CONSTANTS } from "./Constants";
-import { saveObject } from "./SaveObject";
+//import { saveObject } from "./SaveObject";
 import { addPlayTime, setLastUpdate } from "./slices/player";
 import { store } from "./store";
 
@@ -23,7 +23,7 @@ export interface IEngine {
     contractGeneration: number;
     achievementsCounter: number;
   };
-  load: (saveString: string) => void;
+  load: () => void;
   start: () => void;
   decrementAllCounters: (numCycles?: number) => void;
   checkCounters: () => void;
@@ -39,14 +39,10 @@ const Engine = {
     Engine.decrementAllCounters(numCycles);
     Engine.checkCounters();
   },
-  load(saveString: string) {
-    if (saveObject.loadGame(saveString)) {
-      Engine._lastUpdate = new Date().getTime();
-      dispatch(setLastUpdate(Engine._lastUpdate));
-      Engine.start();
-    } else {
-      Engine.start();
-    }
+  load() {
+    Engine._lastUpdate = new Date().getTime();
+    dispatch(setLastUpdate(Engine._lastUpdate));
+    Engine.start();
   },
   start() {
     const _thisUpdate = new Date().getTime();
@@ -75,7 +71,6 @@ const Engine = {
   checkCounters: function () {
     if (Engine.Counters.autoSaveCounter <= 0) {
       Engine.Counters.autoSaveCounter = CONSTANTS.AutosaveInterval * 5;
-      saveObject.saveGame();
     }
   },
 } as IEngine;

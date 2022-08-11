@@ -32,6 +32,9 @@ export const playerSlice = createSlice({
     setLastUpdate: (player, action) => {
       player.lastUpdate = action.payload;
     },
+    FLUSH: (player) => {
+      player.totalPlaytime = +1;
+    },
   },
 });
 

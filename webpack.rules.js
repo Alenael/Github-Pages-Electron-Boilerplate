@@ -14,6 +14,7 @@ module.exports = [
           "@babel/preset-typescript",
           ["@babel/preset-react", { development: isDevelopment }],
         ],
+        sourceMap: isDevelopment,
         plugins: [isDevelopment && isFastRefresh && require.resolve("react-refresh/babel")].filter(Boolean),
       },
     },
@@ -45,6 +46,7 @@ module.exports = [
     loader: "html-loader",
     options: {
       esModule: false,
+      sourceMap: isDevelopment,
     },
   },
   {

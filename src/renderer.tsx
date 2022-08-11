@@ -7,6 +7,7 @@ import { store } from "./store";
 import { LoadingScreen } from "./ui/Loading";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+
 function rerender(): void {
   root.render(
     <React.StrictMode>
