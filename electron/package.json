@@ -28,7 +28,7 @@
               "entryPoints": [
                 {
                   "html": "../src/index.ejs",
-                  "js": "../src/renderer.tsx",
+                  "js": "../src/app/renderer.tsx",
                   "name": "main_window"
                 }
               ]

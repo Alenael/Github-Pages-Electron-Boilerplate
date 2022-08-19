@@ -51,7 +51,7 @@ module.exports = () => {
   return {
     mode: isDevelopment ? "development" : "production",
     devtool: isDevelopment ? "inline-source-map" : false,
-    entry: path.resolve(__dirname, "src", "renderer.tsx"),
+    entry: path.resolve(__dirname, "src/app", "renderer.tsx"),
 
     watchOptions: {
       poll: 1000,
