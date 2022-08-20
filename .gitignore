@@ -85,6 +85,7 @@ typings/
 # Build
 out/
 public/
+.webpack/
 
 # VS Code
 .vscode
