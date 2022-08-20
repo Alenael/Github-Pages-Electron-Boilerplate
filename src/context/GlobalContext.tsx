@@ -4,7 +4,7 @@ import React from "react";
 const GlobalContext = React.createContext({
   monthIndex: 0,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setMonthIndex: (index) => {},
+  setMonthIndex: (index: number) => {},
 });
 
 export default GlobalContext;
