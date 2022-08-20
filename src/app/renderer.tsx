@@ -5,15 +5,21 @@ import { Provider } from "react-redux";
 import "../index.css";
 import { store } from "./store";
 import { LoadingScreen } from "../features/ui/Loading";
+import { ThemeProvider } from "@material-tailwind/react";
+import ContextWrapper from "../context/ContextWrapper";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 function rerender(): void {
   root.render(
     <React.StrictMode>
-      <Provider store={store}>
-        <LoadingScreen />
-      </Provider>
+      <ThemeProvider>
+        <ContextWrapper>
+          <Provider store={store}>
+            <LoadingScreen />
+          </Provider>
+        </ContextWrapper>
+      </ThemeProvider>
     </React.StrictMode>,
   );
 }
