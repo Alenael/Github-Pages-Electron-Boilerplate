@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import "../index.css";
 import { store } from "./store";
 import { LoadingScreen } from "../features/ui/Loading";
-import { ThemeProvider } from "@material-tailwind/react";
 import ContextWrapper from "../context/ContextWrapper";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
@@ -13,13 +12,11 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 function rerender(): void {
   root.render(
     <React.StrictMode>
-      <ThemeProvider>
-        <ContextWrapper>
-          <Provider store={store}>
-            <LoadingScreen />
-          </Provider>
-        </ContextWrapper>
-      </ThemeProvider>
+      <ContextWrapper>
+        <Provider store={store}>
+          <LoadingScreen />
+        </Provider>
+      </ContextWrapper>
     </React.StrictMode>,
   );
 }
