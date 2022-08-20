@@ -13,27 +13,28 @@ export default function CalendarHeader() {
     setMonthIndex(monthIndex + 1);
   }
 
-  function handleReset() {
-    setMonthIndex(dayjs().month());
-  }
+  // function handleReset() {
+  //   setMonthIndex(dayjs().month());
+  // }
 
   return (
-    <header className="px-4 py-2 flex items-center">
+    <header className="my-5 mx-5 justify-start px-10 h-40 flex items-start">
       {/* <img src="" alt="" className="mr-2 w-12 h-12" /> */}
-      <h1 className="mr-10 text-xl text-amber-500 font-bold">Game Release Calendar</h1>
-
-      <button onClick={() => handleReset()} className="border rounded py-2 px-4 mr-5">
-        Today
-      </button>
+      {/* <h1 className="absolute left-5 top-5 text-3xl text-white font-bold">Game Release Calendar</h1> */}
       <button onClick={() => handlePrevMonth()}>
-        <span className="material-symbols-outlined cursor-pointer text-gray-600 mx-2">chevron_left</span>
+        <span className="material-symbols-outlined cursor-pointer my-5 text-white px-2">chevron_left</span>
       </button>
       <button onClick={() => handleNextMonth()}>
-        <span className="material-symbols-outlined cursor-pointer text-gray-600 mx-2">chevron_right</span>
+        <span className="material-symbols-outlined cursor-pointer my-5 text-white px-2">chevron_right</span>
       </button>
-      <h2 className="ml-4 text-xl text-grey-800 font-bold">
-        {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
+      <h2 className="text-4xl text-white font-bold">
+        {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY").toUpperCase()}
+        <h2 className="text-sm font-normal">Upcoming Games</h2>
       </h2>
+
+      {/* <button onClick={() => handleReset()} className="border text-white rounded px-4">
+        Today
+      </button> */}
     </header>
   );
 }
