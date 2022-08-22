@@ -14,7 +14,7 @@ It makes use of the following:
 It also can use Github Actions to automatically produce a variety of builds:
 
 - Publish to Github Pages
-- Win (Via Electron)
+- Winindows
 - Darwin
 - Ubunu
 - Mac
