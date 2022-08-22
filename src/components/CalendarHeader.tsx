@@ -14,7 +14,7 @@ export default function CalendarHeader() {
   }
 
   return (
-    <div className="my-5 mx-5 justify-start px-10 h-26 flex items-start">
+    <div className="font-sora my-5 mx-5 justify-start px-10 h-26 flex items-start">
       <button onClick={() => handlePrevMonth()}>
         <span className="material-symbols-outlined cursor-pointer my-5 text-white px-2">chevron_left</span>
       </button>

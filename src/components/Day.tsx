@@ -35,7 +35,7 @@ export default function Day({ day, recentReleases }: IProps) {
 
   return (
     <React.Fragment>
-      <div className="backdrop-blur-sm bg-white bg-opacity-20 rounded-md drop-shadow-sm hover:rounded-lg mx-1 my-1 flex flex-col">
+      <div className="backdrop-blur-sm bg-white bg-opacity-20 rounded-md drop-shadow-sm mx-1 my-1 flex flex-col">
         <header className="flex flex-col items-left">
           <p className={`text-sm p-1 my-1 mx-1 text-center ${getCurrentDayClass()}`}>{day.format("DD")}</p>
         </header>
