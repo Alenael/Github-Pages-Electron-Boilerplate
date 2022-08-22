@@ -23,7 +23,7 @@ export default function Day({ day, recentReleases }: IProps) {
     const games: string[] = [];
     const gameIdx: string[] = [];
     Object.keys(recentReleases).forEach((value, idx) => {
-      const id = recentReleases[value]["game"]["name"];
+      const id = recentReleases[idx]["game"]["name"];
       if (games.indexOf(id) == -1) {
         games.push(id);
         gameIdx.push(idx.toString());
