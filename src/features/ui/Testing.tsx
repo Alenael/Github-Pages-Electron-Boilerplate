@@ -7,18 +7,18 @@ import background from "../../assets/background.png";
 
 export function Testing(): React.ReactElement {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
+
   const { monthIndex } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
-  console.table(getMonth());
   return (
     <React.Fragment>
       <div className="relative w-full h-screen bg-stone-800 bg-gradient-to-t from-current to-stone-500">
-        <img src={background} className="absolute  w-full h-screen object-cover opacity-30 object-right"></img>
-        <div className="absolute  w-full h-screen flex flex-col">
+        <img src={background} className="absolute w-full h-screen object-cover opacity-30 object-right"></img>
+        <div className="absolute w-full h-full px-6 py-6 flex flex-col">
           <CalendarHeader />
           <Month month={currentMonth} />
         </div>

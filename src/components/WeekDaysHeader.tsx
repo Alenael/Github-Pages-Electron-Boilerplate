@@ -10,7 +10,10 @@ export default function WeekDaysHeader() {
       <React.Fragment>
         {dayjs.weekdaysShort().map((day) => {
           return (
-            <p className="text-sm w-12 leading-tight rounded-full border-black bg-white text-amber-900 text-center font-medium">
+            <p
+              key={day}
+              className="text-sm w-12 leading-tight rounded-full border-black bg-white text-amber-900 text-center font-medium"
+            >
               {day.toUpperCase()}
             </p>
           );

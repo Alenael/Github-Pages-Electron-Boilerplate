@@ -29,12 +29,9 @@ export const playerSlice = createSlice({
       player.lastSave = new Date().getTime();
     },
     addPlayTime: (player, action: PayloadAction<number>) => {
-      console.log(player.totalPlaytime);
       player.totalPlaytime += action.payload;
     },
     setTime: (state) => {
-      console.log(state);
-      console.log(state.time);
       state.time += 5;
     },
     reset: (__state) => {

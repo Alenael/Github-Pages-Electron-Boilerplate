@@ -32,7 +32,6 @@ const Engine = {
   _lastUpdate: new Date().getTime(),
   updateGame(numCycles = 1) {
     const time = numCycles * CONSTANTS._idleSpeed;
-    console.log(store.getState());
     store.dispatch(setTime());
     store.dispatch(addPlayTime(time));
     Engine.decrementAllCounters(numCycles);
