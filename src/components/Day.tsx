@@ -41,9 +41,15 @@ export default function Day({ day, recentReleases }: IProps) {
         </header>
 
         <div className="text-xs">
-          {getReleases().map((release) => {
-            return <div key={release}>{recentReleases[release]["game"]["name"]}</div>;
-          })}
+          {getReleases()
+            .slice(0, 7)
+            .map((release) => {
+              return (
+                <div key={release}>
+                  {recentReleases[release]["game"]["name"]} ({recentReleases[release]["platform"]})
+                </div>
+              );
+            })}
         </div>
       </div>
     </React.Fragment>
