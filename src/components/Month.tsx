@@ -25,7 +25,7 @@ export default function Month({ month }: IProps) {
   return (
     <React.Fragment>
       <WeekDaysHeader />
-      <div className="flex-1 grid grid-cols-7 cols-rows-6 ">
+      <div className="flex-none grid grid-cols-7 cols-rows-6 ">
         {month.map((row, i) => (
           <React.Fragment key={i}>
             {row.map((day, idx) => {

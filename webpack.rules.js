@@ -1,3 +1,5 @@
+const path = require("path");
+
 const isDevelopment = process.env.NODE_ENV !== "production";
 const isFastRefresh = process.env.FAST_REFRESH === "true";
 const outputDirectory = "public";
@@ -53,17 +55,15 @@ module.exports = [
     test: /\.(png|svg|jpe?g|gif|jp2|webp)$/,
     loader: "file-loader",
     options: {
-      name: "[name]-[contenthash].[ext]",
+      name: "assets/images/[name].[ext]",
       esModule: false,
-      outputPath: `assets/images`,
-      publicPath: `./assets/images`,
     },
   },
   {
     test: /\.(ttf|eot|otf|woff)$/,
     loader: "file-loader",
     options: {
-      name: "assets/fonts/[name]-[contenthash].[ext]",
+      name: "assets/fonts/[name].[ext]",
       esModule: false,
     },
   },
@@ -71,7 +71,7 @@ module.exports = [
     test: /\.(ico)$/,
     loader: "file-loader",
     options: {
-      name: "[name]-[contenthash].[ext]",
+      name: "assets/[name].[ext]",
       esModule: false,
     },
   },

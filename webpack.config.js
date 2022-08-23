@@ -5,7 +5,6 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = () => {
-  const packageFolder = path.resolve(__dirname, "public");
   const isDevelopment = process.env.NODE_ENV !== "production";
 
   const htmlConfig = {
@@ -63,7 +62,7 @@ module.exports = () => {
       clean: {
         keep: /.nojekyll/, // Keep these assets under 'ignored/dir'.
       },
-      path: packageFolder,
+      path: path.resolve(__dirname, "public"),
       filename: "bundle.[contenthash].js",
     },
 
@@ -83,13 +82,13 @@ module.exports = () => {
       new HtmlWebPackPlugin(htmlConfig),
       isDevelopment &&
         new webpack.EvalSourceMapDevToolPlugin({
-          //exclude: ["vendor"],
+          exclude: ["vendor"],
           columns: true,
           module: true,
         }),
       !isDevelopment &&
         new webpack.SourceMapDevToolPlugin({
-          filename: "[file]-[contenthash].map",
+          filename: "[file].map",
           columns: true,
           module: true,
         }),

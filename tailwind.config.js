@@ -1,11 +1,10 @@
 const path = require("path");
 
 module.exports = {
-  mode: "jit",
   content: [path.join(__dirname, "./src/**/*.{js,jsx,ts,tsx,html}")],
   theme: {
     fontFamily: {
-      sora: "'Sora', sans-serif",
+      sans: ["Chivo", "Alfa Slab One", "cursive", "sans-serif"],
     },
     backgroundPosition: {
       "top-4": "center top -10rem",
