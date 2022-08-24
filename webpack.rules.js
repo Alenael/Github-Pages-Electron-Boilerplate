@@ -53,26 +53,23 @@ module.exports = [
   },
   {
     test: /\.(png|svg|jpe?g|gif|jp2|webp)$/,
-    loader: "file-loader",
-    options: {
-      name: "assets/images/[name].[ext]",
-      esModule: false,
+    type: "asset/resource",
+    generator: {
+      filename: "assets/images/[name][ext]",
     },
   },
   {
     test: /\.(ttf|eot|otf|woff)$/,
-    loader: "file-loader",
-    options: {
-      name: "assets/fonts/[name].[ext]",
-      esModule: false,
+    type: "asset/resource",
+    generator: {
+      filename: "assets/fonts/[name][ext]",
     },
   },
   {
     test: /\.(ico)$/,
-    loader: "file-loader",
-    options: {
-      name: "assets/[name].[ext]",
-      esModule: false,
+    type: "asset/resource",
+    generator: {
+      filename: "assets/[name][ext]",
     },
   },
 ];

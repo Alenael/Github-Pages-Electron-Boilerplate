@@ -64,6 +64,7 @@ module.exports = () => {
       },
       path: path.resolve(__dirname, "public"),
       filename: "bundle.[contenthash].js",
+      // assetModuleFilename: "assets/images/[name][ext]",
     },
 
     resolve: {
@@ -122,6 +123,7 @@ module.exports = () => {
     },
 
     performance: {
+      hints: false,
       maxEntrypointSize: 512000,
       maxAssetSize: 512000,
     },
