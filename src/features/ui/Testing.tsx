@@ -16,9 +16,7 @@ export function Testing(): React.ReactElement {
 
   return (
     <React.Fragment>
-      <div className="h-screen bg-[url('./assets/images/background.png')]">
-        {/* bg-stone-800 bg-gradient-to-t from-current to-stone-500 */}
-        {/* <img src={background} className="absolute w-full h-full object-cover"></img> */}
+      <div className="bg-[url('./assets/images/background.png')] bg-cover bg-fixed">
         <div className="px-6 py-6 flex flex-col">
           <CalendarHeader />
           <Month month={currentMonth} />

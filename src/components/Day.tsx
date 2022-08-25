@@ -45,7 +45,7 @@ export default function Day({ day, recentReleases }: IProps) {
             .slice(0, 7)
             .map((release) => {
               return (
-                <div key={release}>
+                <div key={release} className=" text-white">
                   {recentReleases[release]["game"]["name"]} ({recentReleases[release]["platform"]})
                 </div>
               );

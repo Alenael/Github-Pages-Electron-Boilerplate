@@ -9,7 +9,7 @@ module.exports = {
     backgroundPosition: {
       "top-4": "center top -10rem",
     },
-    extends: {
+    extend: {
       colors: {
         "fire-engine-red": {
           DEFAULT: "#9F2A2A",
