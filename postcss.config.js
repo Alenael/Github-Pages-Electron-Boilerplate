@@ -7,6 +7,7 @@ module.exports = {
     },
     "postcss-preset-env": {
       stage: 1,
+      features: { "nesting-rules": false },
     },
   },
 };
