@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface IProps {
   day: dayjs.Dayjs;
@@ -7,6 +7,23 @@ interface IProps {
 }
 
 export default function Day({ day, recentReleases }: IProps) {
+  const releases = getReleases();
+  const screenshots = getScreenshots(releases);
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (screenshots != null && screenshots.length > 0) {
+      const interval = setInterval(() => {
+        setIndex(index === screenshots.length - 1 || screenshots.length == 0 ? 0 : index + 1);
+        console.log("Hit");
+      }, 5000);
+
+      return () => clearInterval(interval);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenshots]);
+
   function getCurrentDayClass(): string {
     if (day.isBefore(dayjs(), "day")) return "bg-slate-600 rounded-full w-6";
 
@@ -39,46 +56,49 @@ export default function Day({ day, recentReleases }: IProps) {
     const urls: { url: string; name: string }[] = [];
 
     releases.forEach((release) => {
-      const screenshots = recentReleases[release]["game"]["screenshots"];
-      const image = screenshots?.length > 0 ? screenshots[0]["image_id"] : "";
-      if (image != "")
+      const game = recentReleases[release]["game"];
+      const screenshots = game["screenshots"];
+
+      screenshots &&
         urls.push({
-          url: `//images.igdb.com/igdb/image/upload/t_cover_big/${image}.jpg`,
-          name: recentReleases[release]["game"]["name"],
+          url: `//images.igdb.com/igdb/image/upload/t_cover_big/${screenshots[0]["image_id"]}.jpg`,
+          name: game["name"],
         });
     });
 
     return urls;
   }
 
-  const releases = getReleases();
-  const screenshots = getScreenshots(releases);
+  function getActiveStatus(idx: number): string {
+    if (index == idx) return "z-10 opacity-100";
+    return "opacity-0";
+  }
+
   return (
     <React.Fragment>
-      <div
-        className="flex flex-col mx-1 my-1 bg-cover text-white text-l h-36 bg-white/30 backdrop-blur-sm"
-        style={{ backgroundImage: `url(${screenshots[0]?.url || ""})` }}
-      >
-        <span className={`absolute ${getCurrentDayClass()}`}>{day.format("DD")}</span>
-        <div className="flex-1 opacity-0 hover:opacity-100 truncate">
-          <header>
-            <div className="bg-black/40 text-left">
-              <span className="ml-6">{screenshots[0]?.name || ""}</span>
-            </div>
-          </header>
+      <div className="flex flex-col mx-1 my-1 hover:z-10 hover:scale-125 text-white text-m h-36 bg-white/30 backdrop-blur-sm">
+        <div className="realative">
+          {screenshots.map((screenshot, idx) => {
+            return (
+              <React.Fragment key={idx}>
+                <img
+                  className={`absolute w-full h-full transition-opacity duration-500 ease-out ${getActiveStatus(idx)}`}
+                  src={screenshot?.url || ""}
+                ></img>
+              </React.Fragment>
+            );
+          })}
         </div>
-        {/* p-1 my-1 mx-1 */}
-        {/* <div className="text-xs">
-          {getReleases()
-            .slice(0, 7)
-            .map((release) => {
-              return (
-                <div key={release} className={`text-white`}>
-                  {recentReleases[release]["game"]["name"]} ({recentReleases[release]["platform"]})
-                </div>
-              );
-            })}
-        </div> */}
+        <span className={`absolute z-30 ${getCurrentDayClass()}`}>{day.format("DD")}</span>
+        {screenshots.length > 0 && (
+          <div className="flex-1 opacity-0 z-20 hover:opacity-100 truncate">
+            <header>
+              <div className="bg-black/40 text-left">
+                <span className="ml-6">{screenshots[index]?.name || ""}</span>
+              </div>
+            </header>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );
