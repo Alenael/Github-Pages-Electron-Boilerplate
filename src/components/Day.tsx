@@ -74,9 +74,16 @@ export default function Day({ day, recentReleases }: IProps) {
     return "opacity-0";
   }
 
+  function getScaleStatus(): string {
+    if (screenshots.length > 0) return "hover:scale-150";
+    return "";
+  }
+
   return (
     <React.Fragment>
-      <div className="flex flex-col mx-1 my-1 hover:z-10 hover:scale-125 text-white text-m h-36 bg-white/30 backdrop-blur-sm">
+      <div
+        className={`flex flex-col mx-1 my-1 hover:z-10 ${getScaleStatus()} text-white text-s h-36 bg-white/30 backdrop-blur-sm`}
+      >
         <div className="realative">
           {screenshots.map((screenshot, idx) => {
             return (
