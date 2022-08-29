@@ -7,6 +7,7 @@ import GlobalContext from "../../context/GlobalContext";
 
 export function Testing(): React.ReactElement {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const { monthIndex } = useContext(GlobalContext);
 
@@ -14,12 +15,21 @@ export function Testing(): React.ReactElement {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => window.removeEventListener("resize", handleWindowSizeChange);
+  }, []);
+
+  function handleWindowSizeChange() {
+    setIsMobile(window.innerWidth <= 768);
+  }
+
   return (
     <React.Fragment>
       <div className="bg-[url('./assets/images/background.png')] bg-cover bg-fixed">
         <div className="px-6 py-6 flex flex-col">
           <CalendarHeader />
-          <Month month={currentMonth} />
+          <Month month={currentMonth} isMobile={isMobile} />
         </div>
       </div>
     </React.Fragment>

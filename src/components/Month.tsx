@@ -7,9 +7,10 @@ import { CircularProgress, Grid, Typography } from "@mui/material";
 
 interface IProps {
   month: dayjs.Dayjs[][];
+  isMobile: boolean;
 }
 
-export default function Month({ month }: IProps) {
+export default function Month({ month, isMobile }: IProps) {
   const [recentReleases, setRecentReleases] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,16 +42,28 @@ export default function Month({ month }: IProps) {
     </React.Fragment>
   ) : (
     <React.Fragment>
-      <WeekDaysHeader />
-      <div className="flex-none grid grid-cols-7 cols-rows-6 ">
-        {month.map((row, i) => (
-          <React.Fragment key={i}>
-            {row.map((day, idx) => {
-              return <Day day={day} key={idx} recentReleases={recentReleases} />;
-            })}
-          </React.Fragment>
-        ))}
-      </div>
+      <WeekDaysHeader isMobile={isMobile} />
+      {isMobile ? (
+        <div className="flex-none grid grid-cols-1">
+          {month.map((row, i) => (
+            <React.Fragment key={i}>
+              {row.map((day, idx) => {
+                return <Day day={day} key={idx} recentReleases={recentReleases} isMobile={isMobile} />;
+              })}
+            </React.Fragment>
+          ))}
+        </div>
+      ) : (
+        <div className="flex-none grid grid-cols-7 cols-rows-6 ">
+          {month.map((row, i) => (
+            <React.Fragment key={i}>
+              {row.map((day, idx) => {
+                return <Day day={day} key={idx} recentReleases={recentReleases} isMobile={isMobile} />;
+              })}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
     </React.Fragment>
   );
 }
